@@ -1,0 +1,328 @@
+
+body {
+    margin: 0;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at top center, #2a1a3f 0%, #1a0a2f 50%, #0a0015 100%);
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#pistol {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%) scale(0.6);
+        transform-origin: left center;
+        width: 240px;
+        height: 140px;
+        display: none;
+        }
+        .cabin {
+            width: 80px;
+            height: 120px;
+            position: absolute;
+            top: 10px;
+            left: 0;
+            border: 5px double #d70024;
+            background: linear-gradient(to bottom, #3C2F2F, #1A1A1A);
+            box-shadow: 0 6px 14px rgba(255, 215, 0, 0.4);
+            border-radius: 12px;
+            overflow: hidden;
+            display: block;
+        }
+        .cabin-window {
+            width: 60px;
+            height: 80px;
+            position: absolute;
+            top: 35px;
+            left: 10px;
+            background-size: 90% auto;
+            background-repeat: no-repeat;
+            background-position: center top;
+            border-radius: 5px;
+        }
+        .cabin-cover {
+            width: 60px;
+            height: 20px;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: linear-gradient(to bottom, #3C2F2F, #1A1A1A);
+            border: 2px solid #ff0062;
+        }
+        .barrel, .handle, .base, .trigger, .magazine {
+            display: none;
+        }
+        .heart-piece {
+            position: absolute;
+            font-size: 30px;
+            transform: scale(0.9);
+            transition: left 0.8s ease-out, top 0.8s ease-out, transform 0.8s ease-out, opacity 0.8s ease-out;
+            color: #ff69b4;
+            opacity: 0;
+            filter: drop-shadow(0 0 5px #ff0000) drop-shadow(0 0 10px #ff1493);
+            animation: float-heart 2s ease-in-out infinite;
+        }
+        .heart-piece.visible {
+            opacity: 1;
+        }
+        @keyframes float-heart {
+            0%, 100% {
+                transform: translateY(0) scale(0.6);
+            }
+            50% {
+                transform: translateY(-5px) scale(0.7);
+            }
+        }
+        #target-image {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: float 2s ease-in-out infinite;
+            transition: opacity 0.3s ease;
+            border: none;
+            background-color: transparent;
+            display: none;
+        }
+        #new-image {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border: none;
+            background-color: transparent;
+            animation: float 2s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .explosion {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,1), rgba(255,255,255,0.8), rgba(255,255,255,0));
+            pointer-events: none;
+            box-shadow: 0 0 30px 15px rgba(255,255,255,0.7);
+            transform: translate(-50%, -50%);
+        }
+        @keyframes flashAnim {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            80% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+            }
+        }
+        .message {
+            position: absolute;
+            font-size: 24px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            color: #ff69b4;
+            text-shadow: 0 0 10px #ff1493, 0 0 20px #ff69b4, 0 0 30px #ff0000;
+            opacity: 0;
+            transition: opacity 1s ease, transform 1s ease;
+            transform: translate(-50%, 20px);
+            text-align: center;
+        }
+        .message.visible {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+        .input-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+        }
+        .input-panel header {
+            padding: 15px;
+            background: linear-gradient(45deg, #ff0057, #ff4e7a);
+            color: white;
+            font-size: 1.5em;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        .input-panel p {
+            color: #333;
+            font-size: 1.2em;
+            margin: 15px 0;
+            font-family: 'Roboto', sans-serif;
+        }
+        .input-panel input {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 12px;
+            border: none;
+            background: #f0f0f0;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 1em;
+        }
+        .input-panel input:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(255, 0, 87, 0.5);
+        }
+        .input-panel button {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            background: linear-gradient(45deg, #ff0057, #ff4e7a);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .input-panel button:hover {
+            background: linear-gradient(45deg, #e0004d, #e83765);
+            transform: scale(1.05);
+        }
+        .timer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-size: 0.9em;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            z-index: 1000;
+            display: none;
+        }
+        .timer span {
+            color: #ff0057;
+            font-weight: bold;
+        }
+        #button, #restart {
+            position: absolute;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            background: linear-gradient(to bottom, #800000, #4B0000);
+            color: white;
+            border: 2px solid #1e0147;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+            transition: background 0.3s ease, transform 0.3s ease, opacity 0.5s ease;
+            display: none;
+        }
+        #button:hover, #restart:hover {
+            background: linear-gradient(to bottom, #A00000, #600000);
+            transform: scale(1.05);
+        }
+        #button {
+            left: 0;
+            top: calc(50% + 90px);
+        }
+        #final-image {
+    display: none;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    max-width: 500px;
+    max-height: 500px;
+    transition: opacity 1s ease-in;
+    opacity: 0;
+    border-radius: 20px;
+        }
+        #carta-container {
+            display: none;
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9em;
+            color: #000000;
+            text-shadow: 1px 1px 2px #000000;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+            max-width: 80%;
+            width: 600px;
+            max-height: 60vh;
+            overflow-y: auto;
+            border: 2px solid #ff0057;
+            background-image: url('https://raw.githubusercontent.com/jesuxzx/Im-genes-/main/papel.png');
+            background-size: cover;
+        }
+        #carta-texto {
+            white-space: pre-wrap;
+            overflow: hidden;
+            border-right: .05em solid #ff69b4;
+            animation: blink-caret .7s step-end infinite alternate;
+        }
+       @keyframes blink-caret {
+        50% { border-color: transparent; }
+        }
+        @keyframes blink-caret {
+            50% { border-color: transparent }
+        }
+        @media (max-width: 600px) {
+            .input-panel {
+                width: 95%;
+            }
+            .timer {
+                font-size: 0.8em;
+                padding: 8px 12px;
+            }
+            #carta-container {
+                font-size: 1.2em;
+                padding: 20px;
+                width: 90%;
+                max-height: 70vh;
+            }
+            @keyframes typing {
+                from { width: 0 }
+                to { width: 100% }
+            }
+        }
